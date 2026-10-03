@@ -1,0 +1,27 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "name": "UnfollowX",
+  "description": "Mass unfollow tool created by tharinduxd",
+  "version": "1.2.3",
+  "manifest_version": 3,
+  "icons": {
+    "128": "icons/icon.png"
+  },
+  "action": {
+    "default_title": "Mass Unfollow by tharinduxd",
+    "default_popup": "popup.html",
+    "default_icon": "icons/icon.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "declarativeContent", "scripting", "activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://*.x.com/*/following"],
+      "js": ["contentScript.js"]
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #f4f8ff;
+      --card: rgba(255, 255, 255, 0.94);
+      --primary: #1d9bf0;
+      --primary-dark: #0f7ad9;
+      --text: #0f172a;
+      --muted: #5b6475;
+      --line: #dfe7f3;
+      --soft: #eef5ff;
+      --warning: #fff3d6;
+      --warning-text: #7a5116;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      font-size: 62.5%;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #eef4ff 0%, #f7f9fc 100%);
+      color: var(--text);
+    }
+
+    body {
+      max-width: 600px;
+      margin: 28px auto;
+      padding: 0 20px 40px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 28px 26px 24px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1d9bf0, #3cb7ff);
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 2rem;
+      box-shadow: 0 10px 20px rgba(29, 155, 240, 0.2);
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      line-height: 1.1;
+      letter-spacing: -0.06em;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      position: relative;
+      gap: 18px;
+    }
+
+    .notification {
+      font-size: 1.3rem;
+      color: #0d8a5d;
+      background: #ebfff6;
+      border: 1px solid #bfead7;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 4px;
+      text-align: center;
+      width: 100%;
+      font-weight: 700;
+      visibility: hidden;
+      position: absolute;
+      top: -12px;
+      left: 0;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 1.6rem;
+      line-height: 1.5;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .caption {
+      font-size: 1.35rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .creator {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 1.3rem;
+      color: var(--muted);
+    }
+
+    .creator a {
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .creator a:hover {
+      text-decoration: underline;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fbfdff;
+      padding: 14px 15px;
+      font-size: 1.5rem;
+      line-height: 1.6;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    textarea:focus {
+      border-color: rgba(29, 155, 240, 0.6);
+      box-shadow: 0 0 0 4px rgba(29, 155, 240, 0.12);
+    }
+
+    input[type="number"] {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 1.5rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="number"]:focus {
+      border-color: rgba(29, 155, 240, 0.6);
+      box-shadow: 0 0 0 4px rgba(29, 155, 240, 0.12);
+    }
+
+    .checkbox-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 15px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .info {
+      display: block;
+      border-radius: 12px;
+      background: #0f172a;
+      padding: 12px 14px;
+      color: #edf5ff;
+      font-size: 1.28rem;
+      line-height: 1.7;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .info a {
+      color: #8dd3ff;
+      text-decoration: none;
+    }
+
+    .info a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      padding: 14px 16px;
+      cursor: pointer;
+      box-shadow: 0 12px 20px rgba(29, 155, 240, 0.18);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 24px rgba(29, 155, 240, 0.22);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="panel">
+    <div class="header">
+      <span class="logo">X</span>
+      <h1>Mass Unfollow</h1>
+    </div>
+
+    <form>
+      <p class="notification">Saved! These users won't be unfollowed.</p>
+
+      <div class="field">
+        <label for="usernames">Exclude users</label>
+        <span class="caption">Example: apple,banana</span>
+        <textarea id="usernames" placeholder="apple,banana"></textarea>
+      </div>
+
+      <div class="checkbox-row">
+        <label for="timer">
+          <input id="timer" type="checkbox" name="timer" data-key="twitter-mass-unfollow-timer" />
+          <span>Stop after 1 minute to stay within a safer daily usage window.</span>
+        </label>
+        <span class="info">Limits unfollows to 1 minute to prevent rate limiting. Uncheck to run continuously.</span>
+      </div>
+
+      <div class="checkbox-row">
+        <label for="reload-on-stopped">
+          <input type="checkbox" name="reload-on-stopped" id="reload-on-stopped" data-key="twitter-mass-unfollow-reload-on-stopped">
+          <span>Reload the page when the process ends or is stopped.</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label for="delay">Delay between unfollows (ms)</label>
+        <span class="caption">Milliseconds to wait between each unfollow (e.g., 500 or 1000)</span>
+        <input id="delay" type="number" name="delay" min="0" max="10000" step="100" data-key="twitter-mass-unfollow-delay" />
+      </div>
+
+      <button type="submit">Save settings</button>
+    </form>
+
+    <div class="creator">
+      Created by <a href="https://github.com/tharinduxd0" target="_blank" rel="noreferrer">tharinduxd</a>
+    </div>
+  </div>
+
+  <script type="module" src="options.js"></script>
+</body>
+
+</html>
